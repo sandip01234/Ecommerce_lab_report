@@ -18,31 +18,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-
-
-//@Builder
-//@Getter
-//@Setter
-//public class PaymentRequest {
-//    @JsonProperty("return_url")
-//    private String returnUrl;
-//
-//    @JsonProperty("website_url")
-//    private String websiteUrl;
-//
-//    @JsonProperty("amount")
-//    private Integer amount;
-//
-//    @JsonProperty("purchase_order_id")
-//    private String purchaseOrderId;
-//
-//    @JsonProperty("purchase_order_name")
-//    private String purchaseOrderName;
-//
-//    @JsonProperty("customer_info")
-//
-//    private CustomerInfo customerInfo;
-//}
+
 
 @Data
 @Builder
