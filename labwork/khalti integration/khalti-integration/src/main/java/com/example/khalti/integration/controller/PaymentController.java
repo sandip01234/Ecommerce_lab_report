@@ -18,35 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-//
-//@RestController
-//@RequestMapping("/payment")
-//@RequiredArgsConstructor
-//public class PaymentController {
-//
-//    private final KhaltiService khaltiService;
-//
-//    @PostMapping("/initiate")
-//    public ResponseEntity<String> initiate(@RequestBody PaymentRequest request, HttpServletResponse response) throws IOException {
-//        String paymentUrl = khaltiService.initiatePayment(request);
-//        response.sendRedirect(paymentUrl);
-//        return ResponseEntity.ok(paymentUrl);
-//    }
-//
-//    @GetMapping("/callback")
-//    public ResponseEntity<String> callback(
-//            @RequestParam String pidx,
-//            @RequestParam String amount,
-//            @RequestParam String mobile,
-//            @RequestParam String status) {
-//        var verified = khaltiService.verifyTransaction(pidx);
-//        if ("Completed".equals(verified.getStatus())) {
-//            return ResponseEntity.ok("Payment successful! Transaction ID: " + pidx + ". Redirecting to success page...");
-//        } else {
-//            return ResponseEntity.badRequest().body("Payment " + verified.getStatus() + ". Transaction ID: " + pidx);
-//        }
-//    }
-//}
+
 
 @RestController
 @RequestMapping("/payment")
