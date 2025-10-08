@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wishlist</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    header h1 {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+    .container {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    .form-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      background: #007bff;
+      color: #fff;
+      transition: background 0.2s;
+    }
+    button:hover { background: #0056b3; }
+    ul { list-style: none; padding: 0; }
+    li {
+      background: #f8f9fa;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    li:hover { background: #e9f2ff; }
+  </style>
+
+  <!-- ✅ Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6GT4RX8TJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6GT4RX8TJ');
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>Sandip Kumar Shah</h1>
+  </header>
+
+  <div class="container">
+    <h2>Products</h2>
+    <div class="form-group">
+      <input id="item" placeholder="Enter product">
+      <button onclick="addToWishlist()">Add to Wishlist</button>
+    </div>
+
+    <h2>Your Wishlist</h2>
+    <ul id="wishlist"></ul>
+  </div>
+
+  <script>
+    const products = ['Phone', 'Laptop', 'Shirt'];
+    let wishlist = [];
+
+    function findProduct(name) {
+      if (!name) return null;
+      const n = name.trim().toLowerCase();
+      return products.find(p => p.toLowerCase() === n) || null;
+    }
+
+    function addToWishlist() {
+      const raw = document.getElementById('item').value;
+      const item = findProduct(raw);
+      if (item && !wishlist.includes(item)) {
+        wishlist.push(item);
+        document.getElementById('item').value = '';
+        displayWishlist();
+      } else if (!item) {
+        alert("Product not available!");
+      } else {
+        alert("Item already in wishlist!");
+      }
+    }
+
+    function displayWishlist() {
+      document.getElementById('wishlist').innerHTML =
+        wishlist.map(item => `<li>${item}</li>`).join('');
+    }
+  </script>
+</body>
+</html>

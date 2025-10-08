@@ -1,0 +1,170 @@
+<!-- 
+4.    
+Write a program to create a
+product list and add to wish list feature for the products in an e-commerce
+store and display the wish list items. You can write the program in any
+language as per your comfort. The design is not required. Database is optional;
+you can also work using arrays or any other data structure as per your comfort.
+Though if you opt to use a database, you can.
+
+ -->
+
+<!-- Source code -->
+ 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Wishlist</title>
+    <style>
+      /* Reset and base styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f4f6f9;
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      /* Header with your name */
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      header h1 {
+        font-size: 28px;
+        color: #333;
+      }
+
+      /* Container for products */
+      .container {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        margin: 0 auto; /* center */
+      }
+
+      h1,
+      h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      /* Form styles */
+      .form-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+
+      button {
+        padding: 10px 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        background: #007bff;
+        color: #fff;
+        transition: background 0.2s;
+      }
+
+      button:hover {
+        background: #0056b3;
+      }
+
+      /* Wishlist list */
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      li {
+        background: #f8f9fa;
+        margin: 8px 0;
+        padding: 10px;
+        border-radius: 8px;
+        transition: background 0.2s;
+      }
+
+      li:hover {
+        background: #e9f2ff;
+      }
+
+      /* Responsive
+      @media (max-width: 600px) {
+        .container {
+          padding: 15px 20px;
+        }
+
+        header h1 {
+          font-size: 24px;
+        }
+
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <h1>Sandip Kumar Shah</h1>
+    </header>
+
+    <!-- Product container -->
+    <div class="container">
+      <h1>Products</h1>
+      <div class="form-group">
+        <input id="item" placeholder="Enter product" />
+        <button onclick="addToWishlist()">Wishlist</button>
+      </div>
+      <h2>Wishlist</h2>
+      <ul id="wishlist"></ul>
+    </div>
+
+    <script>
+      const products = ["Phone", "Laptop", "Shirt"];
+      let wishlist = [];
+
+      function findProduct(name) {
+        if (!name) return null;
+        const n = name.trim().toLowerCase();
+        return products.find((p) => p.toLowerCase() === n) || null;
+      }
+
+      function addToWishlist() {
+        const raw = document.getElementById("item").value;
+        const item = findProduct(raw);
+        if (item && !wishlist.includes(item)) {
+          wishlist.push(item);
+          document.getElementById("item").value = "";
+          displayWishlist();
+        } else if (!item) {
+          alert("Product not available!");
+        }
+      }
+
+      function displayWishlist() {
+        document.getElementById("wishlist").innerHTML = wishlist
+          .map((item) => `<li>${item}</li>`)
+          .join("");
+      }
+    </script>
+  </body>
+</html>

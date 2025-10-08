@@ -1,0 +1,168 @@
+<!-- 3.    
+Write a program to implement
+add to cart and checkout feature of an e-commerce shopping store and display
+the ordered list of items. You can write the program in any language as per
+your comfort. The design is not required. Database is optional; you can also
+work using arrays or any other data structure as per your comfort. Though if
+you opt to use a database, you can. -->
+
+<!-- Source code -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Checkout</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f4f6f9;
+        padding: 20px;
+        min-height: 100vh;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      header h1 {
+        font-size: 28px;
+        color: #333;
+      }
+      .container {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      h1,
+      h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 15px;
+      }
+      .form-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+      input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+      button {
+        padding: 10px 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.2s;
+      }
+      .add {
+        background: #007bff;
+        color: #fff;
+      }
+      .add:hover {
+        background: #0056b3;
+      }
+      .checkout {
+        background: #28a745;
+        color: #fff;
+      }
+      .checkout:hover {
+        background: #1e7e34;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        background: #f8f9fa;
+        margin: 8px 0;
+        padding: 10px;
+        border-radius: 8px;
+        transition: background 0.2s;
+      }
+      li:hover {
+        background: #e9f2ff;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Sandip Kumar Shah</h1>
+    </header>
+
+    <div class="container">
+      <h1>Products</h1>
+      <div class="form-group">
+        <input id="item" placeholder="Enter product" />
+        <button class="add" onclick="addToCart()">Add</button>
+        <button class="checkout" onclick="checkout()">Checkout</button>
+      </div>
+
+      <h2>Cart</h2>
+      <ul id="cart"></ul>
+
+      <h2>Orders</h2>
+      <ul id="orders"></ul>
+    </div>
+
+    <script>
+      const products = ["Phone", "Laptop", "Shirt"];
+      let cart = [],
+        orders = [];
+
+      function findProduct(name) {
+        if (!name) return null;
+        const n = name.trim().toLowerCase();
+        return products.find((p) => p.toLowerCase() === n) || null;
+      }
+
+      function addToCart() {
+        const raw = document.getElementById("item").value;
+        const item = findProduct(raw);
+        if (item) {
+          cart.push(item);
+          document.getElementById("item").value = "";
+          displayCart();
+        } else {
+          alert("Product not available! (Phone, Laptop, Shirt)");
+        }
+      }
+
+      function checkout() {
+        if (cart.length) {
+          orders.push(...cart);
+          cart = [];
+          displayCart();
+          displayOrders();
+          alert("Checkout successful!");
+        } else alert("Cart is empty!");
+      }
+
+      function displayCart() {
+        document.getElementById("cart").innerHTML = cart
+          .map((i) => `<li>${i}</li>`)
+          .join("");
+      }
+
+      function displayOrders() {
+        document.getElementById("orders").innerHTML = orders
+          .map((i) => `<li>${i}</li>`)
+          .join("");
+      }
+    </script>
+  </body>
+</html>

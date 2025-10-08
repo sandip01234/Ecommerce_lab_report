@@ -1,0 +1,170 @@
+<!-- 
+2.    
+Write a program to create a
+product list and add to cart feature for the products in an e-commerce store
+and display cart items. You can write the program in any language as per your
+comfort. The design is not required. Database is optional; you can also work
+using arrays or any other data structure as per your comfort. Though if you opt
+to use a database, you can.  -->
+
+<!-- Source code -->
+ 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shopping Cart — Fixed Update</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f4f6f9;
+        padding: 20px;
+        min-height: 100vh;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      header h1 {
+        font-size: 28px;
+        color: #333;
+      }
+      .container {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      h1,
+      h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 15px;
+      }
+      .form-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+      input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+      button {
+        padding: 10px 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .add {
+        background: #007bff;
+        color: #fff;
+      }
+      .update {
+        background: #ffc107;
+        color: #000;
+      }
+      .delete {
+        background: #dc3545;
+        color: #fff;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        background: #f8f9fa;
+        margin: 8px 0;
+        padding: 10px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      li:hover {
+        background: #e9f2ff;
+      }
+      .actions {
+        display: flex;
+        gap: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Sandip Kumar Shah</h1>
+    </header>
+
+    <div class="container">
+      <h1>Products</h1>
+      <div class="form-group">
+        <input id="item" placeholder="Enter product" />
+        <button class="add" onclick="addToCart()">Add</button>
+      </div>
+
+      <h2>Cart</h2>
+      <ul id="cart"></ul>
+    </div>
+
+    <script>
+      const products = ["Phone", "Laptop", "Shirt"];
+      let cart = [];
+
+      function findProduct(name) {
+        if (!name) return null;
+        const n = name.trim().toLowerCase();
+        return products.find((p) => p.toLowerCase() === n) || null;
+      }
+
+      function addToCart() {
+        const raw = document.getElementById("item").value;
+        const found = findProduct(raw);
+        if (found) {
+          cart.push(found);
+          document.getElementById("item").value = "";
+          displayCart();
+        } else {
+          alert("Product not available! (type Phone, Laptop or Shirt)");
+        }
+      }
+
+      function updateCart(i) {
+        const newItemRaw = prompt("Enter new product:", cart[i]);
+        if (newItemRaw === null) return;
+        const found = findProduct(newItemRaw);
+        if (found) {
+          cart[i] = found;
+          displayCart();
+        } else alert("Product not available! (type Phone, Laptop or Shirt)");
+      }
+
+      function deleteCart(i) {
+        cart.splice(i, 1);
+        displayCart();
+      }
+
+      function displayCart() {
+        document.getElementById("cart").innerHTML = cart
+          .map(
+            (item, i) => `<li>${item}<div class="actions">
+          <button class="update" onclick="updateCart(${i})">Update</button>
+          <button class="delete" onclick="deleteCart(${i})">Delete</button>
+        </div></li>`
+          )
+          .join("");
+      }
+    </script>
+  </body>
+</html>
